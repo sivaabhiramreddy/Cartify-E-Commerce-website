@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="categories">
+    <a href="/">All</a>
+    {% for category in categories %}
+        <a href="/?category={{ category.id }}">{{ category.name }}</a>
+    {% endfor %}
+</div>
+
+<div class="products">
+    {% for product in products %}
+        <div class="product">
+
+            {% if product.image %}
+                <img src="{{ product.image.url }}" class="product-img">
+            {% endif %}
+
+            <h3>{{ product.name }}</h3>
+            <p class="price">₹{{ product.price }}</p>
+            <a href="{% url 'product_detail' product.id %}" class="btn">View</a>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

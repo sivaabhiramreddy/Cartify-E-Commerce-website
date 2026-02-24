@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="cart-container">
+
+    <h2 class="cart-title">🛒 Your Cart</h2>
+
+    {% if cart %}
+        <div class="cart-items">
+            {% for item in cart %}
+                <div class="cart-item">
+
+                    <div class="item-info">
+                        <h4>{{ item.name }}</h4>
+                        <p>₹{{ item.price }}</p>
+                    </div>
+
+                    <a href="{% url 'remove_from_cart' forloop.counter0 %}" 
+                       class="remove-btn">
+                        Remove
+                    </a>
+
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="cart-summary">
+            <h3>Total: ₹{{ total }}</h3>
+            <a href="{% url 'checkout' %}" class="checkout-btn">
+                Proceed to Checkout
+            </a>
+        </div>
+
+    {% else %}
+        <div class="empty-cart">
+            <p>Your cart is empty 🛍️</p>
+            <a href="{% url 'home' %}" class="shop-btn">
+                Continue Shopping
+            </a>
+        </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}
